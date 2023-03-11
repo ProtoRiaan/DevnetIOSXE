@@ -4,3 +4,6 @@ Ran into some issues connecting to the 'reccommended' code sandbox. Verified it 
 They provided a link and new credentials to use on the "latest" code sandbox. Tested today and it is working well. 
 
 Thus far I am able to get and print a list of the capabiliteis and also grab and print the running config in xml and print it to a file for review.
+
+Next step is to pick a data model from the capabilities list and pull the schema with .get_schema, From here we can create a fileter for our config xml replies.
+For now I am printing the Schema into file for easy review and study. These can all also be found online and possibly in the yang explorer tool on developer.cisco.com.

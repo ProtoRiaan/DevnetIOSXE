@@ -8,7 +8,8 @@ m=manager.connect(host=router["host"],port=router['port'],username=router["usern
 for capability in m.server_capabilities:
         print('*' * 50)
         print(capability)
-pulledconfig=m.get_config(source='running').data_xml
+pulledconfig=m.get_config(source='running').xml
+schema = m.get_schema('ietf-interfaces')
 m.close_session()
 
 #prettyXML=ET.parse(pulledconfig)
@@ -17,5 +18,9 @@ m.close_session()
 xmlOutputFile =open('config.xml','w')
 xmlOutputFile.write(pulledconfig)
 xmlOutputFile.close()
+
+schemaFile = open('schema.txt','w')
+schemaFile.write(str(schema))
+schemaFile.close()
 
 
