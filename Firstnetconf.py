@@ -23,7 +23,9 @@ pulledconfig=m.get_config(source='running').xml
 #pull a yang schema as a string
 schema = m.get_schema('ietf-interfaces').xml
 
-#Printing some specific items using test filters.
+# Printing some specific items using test filters.
+# Also using XMLtodict to grab the hostname as a string and saving in variable for later use
+
 hostname = """
 <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
  <hostname>
@@ -31,6 +33,9 @@ hostname = """
 </native>
 """
 print(m.get_config(source='running',filter=("subtree",hostname)))
+routerHostnameXML = m.get_config(source='running',filter=("subtree",hostname)).xml
+routerHostnameString = xmltodict.parse(routerHostnameXML)
+routerHostnameValue = routerHostnameString['rpc-reply']['data']['native']['hostname']
 
 version = """
 <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
@@ -61,9 +66,26 @@ print(interfaceParseTest)
 #for interface in m.get_config(source='running',filter=("subtree",interfaceConfigured)):
 #        print(interface)
 
-interfaceParseTestXML = xmltodict.parse(interfaceParseTest)
-print(type(interfaceParseTestXML))
-print(interfaceParseTestXML)
+
+#Converting the XML string to a dictionary object and printing out the individual configured interfaces and associated settings.
+
+print('\n' * 5, "*" * 100)
+print(f'      List of interfaces configurations on {routerHostnameValue} : \n')
+print('*' * 100)
+interfaceParseTestDict = xmltodict.parse(interfaceParseTest)
+for interface in interfaceParseTestDict['rpc-reply']['data']['interfaces']['interface']:
+        #print(interface)
+        print(f'Interface Name : {interface["name"]}')
+        try:
+                print(f'Interface Description : {interface["description"]}')
+        except:
+                print('Interface Description : None')
+        print(f'Interface Enabled : {interface["enabled"]}')
+        try:                
+                print(f'IP Address : {interface["ipv4"]["address"]}')
+        except:
+                print('IP Address : No IP address configured')
+        print('*' * 100,'\n')
 
 m.close_session()
 
