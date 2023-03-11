@@ -7,3 +7,5 @@ Thus far I am able to get and print a list of the capabiliteis and also grab and
 
 Next step is to pick a data model from the capabilities list and pull the schema with .get_schema, From here we can create a fileter for our config xml replies.
 For now I am printing the Schema into file for easy review and study. These can all also be found online and possibly in the yang explorer tool on developer.cisco.com.
+
+Made some good progress practicing how to pass in a filter string to specify a specific confg item to retrieve. Still working on how to pull a a larger element then itterate through the children.
