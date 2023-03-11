@@ -1,5 +1,6 @@
 from ncclient import manager
 import lxml.etree as ET
+import xmltodict
 
 router={"host":"sandbox-iosxe-latest-1.cisco.com", "port":"830",
         "username":"developer","password":"redmonitorioxdedicated34721"}
@@ -44,12 +45,25 @@ interfaceConfigured = """
 </interfaces>
 """
 
-interfaceParseTest = m.get_config(source='running',filter=("subtree",interfaceConfigured))
+interfaceParseTest = m.get_config(source='running',filter=("subtree",interfaceConfigured)).xml
 print(type(interfaceParseTest))
+print(interfaceParseTest)
+
+# This part of the code is not working. ET cant parse the string with the Unicode element attached to the string. 
+# I can probably solve this by writing to a file and using the ET.parse(filename)
+# I know this is duplication of the config.xml but it is a smaller section and we are practicing working with XML.
+# I do need to do some more research and see if there is a better way to work with this. I am sure xmltodict can handle the parse, will test with that later
+
+#interfaceParseTestXML = ET.fromstring(interfaceParseTest)
+#print(type(interfaceParseTestXML))
+#print(interfaceParseTestXML)
 
 #for interface in m.get_config(source='running',filter=("subtree",interfaceConfigured)):
 #        print(interface)
 
+interfaceParseTestXML = xmltodict.parse(interfaceParseTest)
+print(type(interfaceParseTestXML))
+print(interfaceParseTestXML)
 
 m.close_session()
 
@@ -63,9 +77,4 @@ xmlOutputFile.close()
 schemaFile = open('schema.txt','w')
 schemaFile.write(schema)
 schemaFile.close()
-
-#Trying to clean up the xml config data
-#can we grab just the 'Data' element
-#configData=pulledconfig['data']
-#configXML = ET.parse(pulledconfig)
 
