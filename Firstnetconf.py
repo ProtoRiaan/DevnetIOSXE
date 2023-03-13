@@ -108,9 +108,8 @@ writeLoopbackInterfaceFilter = '''
   <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
 	<interface>
           <name>Loopback69</name>
-       	  <name>Loopback69</name>
-	  <description>Created by Badrobot using ncclient</description>	  
-	  <enabled>true</enabled>	  
+       	  <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:softwareLoopback</type>
+	  <description>Created by Badrobot using ncclient</description>	  	    
 	</interface>
   </interfaces>
 </config>

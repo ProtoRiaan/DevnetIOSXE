@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:b27e2709-dd6a-4e12-99a3-8a203c695bfb" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><data><native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native"><version>17.3</version><boot-start-marker/><boot-end-marker/><banner><motd><banner>
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:2e1b1bb5-de5b-4707-9d40-19aa72706fa5" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><data><native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native"><version>17.3</version><boot-start-marker/><boot-end-marker/><banner><motd><banner>
 Welcome to the DevNet Sandbox for CSR1000v and IOS XE
  
 The following programmability features are already enabled:
