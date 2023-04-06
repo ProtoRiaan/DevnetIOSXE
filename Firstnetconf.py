@@ -80,26 +80,6 @@ print(interfaceParseTest)
 #        print(interface)
 
 
-#  Converting the XML string to a dictionary object and printing out the individual configured interfaces and associated settings.
-
-print('\n' * 5, "*" * 100)
-print(f'      List of interfaces configurations on {routerHostnameValue} : \n')
-print('*' * 100)
-interfaceParseTestDict = xmltodict.parse(interfaceParseTest)
-for interface in interfaceParseTestDict['rpc-reply']['data']['interfaces']['interface']:
-        #print(interface)
-        print(f'Interface Name : {interface["name"]}')
-        try:
-                print(f'Interface Description : {interface["description"]}')
-        except:
-                print('Interface Description : None')
-        print(f'Interface Enabled : {interface["enabled"]}')
-        try:                
-                print(f'IP Address : {interface["ipv4"]["address"]}')
-        except:
-                print('IP Address : No IP address configured')
-        print('*' * 100,'\n')
-
 #  Section for writing config
 
 #  Filter for writing config
@@ -123,7 +103,25 @@ m.edit_config(
         default_operation='merge'
 )
 
+#  Converting the XML string to a dictionary object and printing out the individual configured interfaces and associated settings.
 
+print('\n' * 5, "*" * 100)
+print(f'      List of interfaces configurations on {routerHostnameValue} : \n')
+print('*' * 100)
+interfaceParseTestDict = xmltodict.parse(interfaceParseTest)
+for interface in interfaceParseTestDict['rpc-reply']['data']['interfaces']['interface']:
+        #print(interface)
+        print(f'Interface Name : {interface["name"]}')
+        try:
+                print(f'Interface Description : {interface["description"]}')
+        except:
+                print('Interface Description : None')
+        print(f'Interface Enabled : {interface["enabled"]}')
+        try:                
+                print(f'IP Address : {interface["ipv4"]["address"]}')
+        except:
+                print('IP Address : No IP address configured')
+        print('*' * 100,'\n')
 
 
 # setting filter for interface state

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:e29347a2-4460-4f3c-9b78-b2dfdd713cc6" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><data xmlns='urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring'><![CDATA[module iana-if-type {
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:72c1806c-75b2-495a-9526-b74133c73006" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><data xmlns='urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring'><![CDATA[module iana-if-type {
   namespace "urn:ietf:params:xml:ns:yang:iana-if-type";
   prefix ianaift;
 
