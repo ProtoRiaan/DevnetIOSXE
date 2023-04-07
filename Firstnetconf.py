@@ -5,6 +5,14 @@ import xml.dom.minidom as MiniDom
 from devices import router
 
 def main():
+	primary()
+	revert=input("Would you like to revert your changes. Pres 'Y' to revert or any other key to end: ")
+	if revert=='Y':
+		removeInt()
+
+	print("Thank you for testing my ncclient script with me, come back soon")
+
+def primary():
 	datafilter ="""
 	<interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
 	</interfaces>
@@ -154,8 +162,9 @@ def removeInt():
 	deleteLoopbackInterfaceFilter = '''
 	<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
 	<interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
-		<interface>
+		<interface operation="delete">
 			<name>Loopback69</name>
+			<type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:softwareLoopback</type>
 		</interface>
 	</interfaces>
 	</config>
@@ -163,12 +172,12 @@ def removeInt():
 
 	#  Write config to router
 
-	with manager.connect(host=router["host"],port=router['port'],username=router["username"],password=router["password"],hostkey_verify=False,device_params={'name':'csr'}) as m
-	m.DeleteConfig(
+	with manager.connect(host=router["host"],port=router['port'],username=router["username"],password=router["password"],hostkey_verify=False,device_params={'name':'csr'}) as m:
+		m.edit_config(
 			target='running',
 			config=deleteLoopbackInterfaceFilter,
 			default_operation='merge'
-	)
+		)
 
 
 if __name__=="__main__":
